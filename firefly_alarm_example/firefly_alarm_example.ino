@@ -5,15 +5,15 @@ int SerialMessageLength = 200;
 char data[200] = {}; //serial buffer
 int index = 0;
 bool messageRead = false;
+char moduleId[] = "568";
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Serial ready!");
   
-  delay(5000);
-  FFSetSensors("909", 1, 1, 1, 1, 1, 1);
-  FFSetOutput("909", 0, 0, 0, 1, 1);
-  FFContinuousResponse("909", "4", "01");
+  //delay(5000);
+  FFSetSensors(moduleId, 1, 1, 1, 1, 1, 1);
+  FFContinuousResponse(moduleId, "4", "01");
 }
 
 void loop() {
@@ -44,6 +44,7 @@ void loop() {
       index = 0;
     }
     if(messageRead == true){
+      Serial.println("message read");
       messageRead = false;
       
       StaticJsonBuffer<200> jsonBuffer;
