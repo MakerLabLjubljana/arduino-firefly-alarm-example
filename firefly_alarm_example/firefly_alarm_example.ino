@@ -5,13 +5,12 @@ int SerialMessageLength = 200;
 char data[200] = {}; //serial buffer
 int index = 0;
 bool messageRead = false;
-char moduleId[] = "568";
+char moduleId[] = "<FF_ID>";
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Serial ready!");
   
-  //delay(5000);
   FFSetSensors(moduleId, 1, 1, 1, 1, 1, 1);
   FFContinuousResponse(moduleId, "4", "01");
 }
@@ -80,7 +79,6 @@ void loop() {
       //Serial.println(data);
 
       data[0] = '\0'; //clear data array
-      data[0] = (char)0; //Just to be sure :D
       break;
     } 
   }
